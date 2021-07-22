@@ -5,7 +5,13 @@ import Adapters from "next-auth/adapters";
 import prisma from "../../../lib/prisma";
 
 const options = {
-  site: process.env.SITE || "http://localhost:3000",
+  pages: {
+    signIn: "/signin",
+    // signOut: '/auth/signout',
+    // error: '/auth/error', // Error code passed in query string as ?error=
+    // verifyRequest: '/auth/verify-request', // (used for check email message)
+    newUser: "/profile", // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
   providers: [
     Providers.Email({
       server: {
@@ -21,6 +27,15 @@ const options = {
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
   secret: process.env.SECRET,
+  callbacks: {
+    async session(session, token) {
+      // expose user id
+      return Promise.resolve({
+        ...session,
+        user: { ...session.user, id: token.id },
+      });
+    },
+  },
 };
 
 // we will define `options` up next

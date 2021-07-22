@@ -50,7 +50,6 @@ model User {
   posts         Post[]
   comments      Comment[]
   role          Role     @default(USER)
-  profile       Profile?
 }
 
 model VerificationRequest {
@@ -90,14 +89,6 @@ model Comment {
   postId      String
   author      User        @relation(fields: [authorId], references: [id])
   authorId    String
-}
-
-model Profile {
-  id      String      @id @default(cuid()) 
-  bio     String?
-  avatar  String?
-  userId  String      @unique
-  user    User        @relation(fields: [userId], references: [id])
 }
 
 enum Role {
