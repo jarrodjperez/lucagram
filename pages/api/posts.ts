@@ -6,9 +6,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     try {
       const post: Prisma.PostCreateInput = JSON.parse(req.body);
-      const savedPost = await prisma.post.create({ data: post });
+      const savedPost = await prisma.post.create({
+        data: post,
+      });
       res.status(200).json(savedPost);
     } catch (err) {
+      console.log(err);
       res.status(400).json({ message: "Something went wrong" });
     }
   } else {

@@ -8,9 +8,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const photo: Prisma.MediaCreateInput = JSON.parse(req.body);
-    const savedPhoto = await prisma.media.create({ data: photo });
-    res.status(200).json(savedPhoto);
+    const media: Prisma.MediaCreateInput[] = JSON.parse(req.body);
+
+    const savedIds = await Promise.all(
+      media.map(async (file) => {
+        const savedMedia = await prisma.media.create({ data: file });
+        return { id: savedMedia.id };
+      })
+    );
+    res.status(200).json(savedIds);
   } catch (err) {
     res.status(400).json({ message: "Something went wrong" });
   }

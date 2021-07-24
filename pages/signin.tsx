@@ -9,11 +9,13 @@ const signin = ({ csrfToken }) => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h1 className="text-6xl px-2 font-logo text-center">Lucagram</h1>
-          <h2 className="mt-6 text-center text-2xl text-gray-900">
+          <h1 className="text-6xl px-2 font-logo text-center text-black dark:text-white">
+            Lucagram
+          </h1>
+          <h2 className="mt-6 text-center text-2xl text-black dark:text-white">
             Sign in to your account
           </h2>
         </div>
@@ -42,7 +44,7 @@ const signin = ({ csrfToken }) => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2"
+              className="group bg-gradient-to-r from-primary to-secondary text-white relative w-full flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <LockClosedIcon

@@ -5,7 +5,6 @@ import Adapters from "next-auth/adapters";
 import prisma from "../../../lib/prisma";
 
 const options = {
-  theme: "light",
   pages: {
     signIn: "/signin",
     // signOut: '/auth/signout',
