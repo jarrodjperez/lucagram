@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 import { Form, Field } from "react-final-form";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Footer from "../components/Footer";
 
 const onSubmit = async (values: Prisma.UserUpdateInput) => {
   const response = await fetch("/api/profile", {
@@ -138,6 +139,7 @@ export default function Profile() {
           )}
         />
       </div>
+      <Footer />
     </div>
   );
 }

@@ -45,6 +45,18 @@ export default function Navigation() {
           )}
         </a>
       </Link>
+      <Link href="/profile">
+        <a
+          className={clsx(
+            "font-medium px-6 cursor-pointer text-black dark:text-white"
+          )}
+        >
+          Profile
+          {pathname === "/profile" && (
+            <div className="h-0.5 bg-gradient-to-r from-primary to-secondary w-full"></div>
+          )}
+        </a>
+      </Link>
     </nav>
   );
 
