@@ -15,7 +15,7 @@ export default function Navigation() {
             "font-medium px-6 cursor-pointer text-black dark:text-white"
           )}
         >
-          Home
+          Feed
           {pathname === "/feed" && (
             <div className="h-0.5 bg-gradient-to-r from-primary to-secondary w-full"></div>
           )}

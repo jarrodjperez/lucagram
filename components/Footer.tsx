@@ -7,7 +7,7 @@ export default function Footer() {
   const { pathname } = useRouter();
 
   return (
-    <footer className="z-10 fixed bottom-0 left-0 right-0 py-4 flex md:hidden justify-around items-center bg-white dark:bg-light-gray">
+    <footer className="z-10 fixed bottom-0 left-0 right-0 py-4 flex md:hidden justify-around items-center bg-white dark:bg-light-gray rounded-t-lg">
       <Link href="/">
         <a>
           <HomeIcon

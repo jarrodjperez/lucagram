@@ -11,10 +11,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       });
       res.status(200).json(savedPost);
     } catch (err) {
-      console.log(err);
+      res.status(400).json({ message: "Something went wrong" });
+    }
+  } else if (req.method === "GET") {
+    try {
+      const posts: Post[] = await prisma.post.findMany({
+        orderBy: { createdAt: "desc" },
+        include: { media: true, author: true },
+      });
+      res.status(200).json(posts);
+    } catch (err) {
       res.status(400).json({ message: "Something went wrong" });
     }
   } else {
-    return res.status(405).json({ message: "Method not allowed" });
+    res.status(405).json({ message: "Method not allowed" });
   }
 };

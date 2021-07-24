@@ -6,8 +6,8 @@ interface Props {
 
 const PhotoCard = ({ photo }: Props) => {
   return (
-    <div className="w-100 mx-2 md:mx-0 md:max-w-sm overflow-hidden shadow-lg rounded-sm">
-      <img src={photo.url} alt="" className="w-full h-60 object-cover" />
+    <div className="md:max-w-sm overflow-hidden md:shadow-lg md:rounded-lg md:mx-0">
+      <img src={photo.url} alt="" className="w-full object-fit" />
     </div>
   );
 };

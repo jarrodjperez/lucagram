@@ -6,8 +6,8 @@ interface Props {
 
 const VideoCard = ({ video }: Props) => {
   return (
-    <div className="w-100 mx-2 md:mx-0 md:max-w-sm overflow-hidden shadow-lg rounded-sm">
-      <video className="w-full h-60 object-cover" controls>
+    <div className="md:max-w-sm overflow-hidden md:shadow-lg md:rounded-lg md:mx-0">
+      <video className="w-full object-fit" controls>
         <source src={video.url} type={video.type} />
       </video>
     </div>

@@ -1,25 +1,17 @@
 import VideoCard from "../components/VideoCard";
-import prisma from "../lib/prisma";
-import { Media } from "@prisma/client";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import useSWR from "swr";
+import { fetcher } from "../lib/fetcher";
 
-export async function getServerSideProps() {
-  const videos: Media[] = await prisma.media.findMany({
-    where: { type: "video/mp4" },
-  });
-  return {
-    props: {
-      videos: JSON.parse(JSON.stringify(videos)),
-    },
-  };
-}
+export default function Home() {
+  const { data: videos, error } = useSWR("/api/videos", fetcher);
 
-export default function Home({ videos }) {
+  if (!videos) return null;
   return (
     <div className="container mx-auto">
       <Header />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-10 overflow-hidden items-center pt-2 pb-16 md:pb-4">
+      <div className="grid grid-cols-3 gap-0 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:gap-10 items-center md:pt-4 pb-16 md:pb-4">
         {videos.map((video) => (
           <VideoCard key={video.id} video={video} />
         ))}

@@ -6,6 +6,7 @@ module.exports = {
     fontFamily: {
       sans: ["Montserrat"],
       logo: ["Cookie"],
+      mono: ["ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas"],
     },
     extend: {
       colors: {

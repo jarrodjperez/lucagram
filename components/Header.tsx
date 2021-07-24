@@ -25,7 +25,7 @@ export default function Header() {
           <>
             <Link href="/upload">
               <button className="mr-2 bg-gradient-to-r from-primary to-secondary inline-flex items-center rounded-full md:px-3 md:py-2 text-sm leading-4 font-medium md:rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2">
-                <PlusCircleIcon className="w-6 h-6" />
+                <PlusCircleIcon className="w-6 h-6 dark:text-dark-gray md:dark:text-white" />
                 <span className="hidden md:inline-block md:ml-2">
                   Add photo
                 </span>
