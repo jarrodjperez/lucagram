@@ -1,17 +1,45 @@
 import { useState } from "react";
 import { useS3Upload } from "next-s3-upload";
-import { Prisma } from "@prisma/client";
+import { Prisma, Role, User } from "@prisma/client";
 import { useDropzone } from "react-dropzone";
 import Header from "../components/Header";
-import { useSession } from "next-auth/client";
-import prisma from "../lib/prisma";
+import useSWR from "swr";
+import { fetcher } from "../lib/fetcher";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function UploadTest() {
+  const router = useRouter();
   const { uploadToS3 } = useS3Upload();
-  const [session] = useSession();
   const [files, setFiles] = useState<Array<Prisma.MediaCreateInput>>([]);
   const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState("");
+  const { data: user, error } = useSWR<User>("/api/me", fetcher);
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*, video/*",
+    onDrop: async (acceptedFiles) => {
+      setLoading(true);
+      const s3Urls = await Promise.all(
+        acceptedFiles.map(async (file) => {
+          const { url } = await uploadToS3(file);
+          return { url, type: file.type };
+        })
+      );
+
+      setFiles(s3Urls);
+      setLoading(false);
+    },
+  });
+
+  useEffect(() => {
+    if (user?.role === Role.USER) {
+      router.push("/feed");
+    }
+  }, [user]);
+
+  if (!user || user?.role === Role.USER) {
+    return <>Loading</>;
+  }
 
   async function savePost() {
     setLoading(true);
@@ -55,22 +83,6 @@ export default function UploadTest() {
     setLoading(false);
     return await post.json();
   }
-
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*, video/*",
-    onDrop: async (acceptedFiles) => {
-      setLoading(true);
-      const s3Urls = await Promise.all(
-        acceptedFiles.map(async (file) => {
-          const { url } = await uploadToS3(file);
-          return { url, type: file.type };
-        })
-      );
-
-      setFiles(s3Urls);
-      setLoading(false);
-    },
-  });
 
   const thumbs = files.map((file) => {
     return (

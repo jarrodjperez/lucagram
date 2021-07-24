@@ -4,9 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/client";
 import { PlusCircleIcon } from "@heroicons/react/solid";
+import useSWR from "swr";
+import { fetcher } from "../lib/fetcher";
+import { User, Role } from "@prisma/client";
 
 export default function Header() {
   const [session, loading] = useSession();
+  const { data: user, error } = useSWR<User>("/api/me", fetcher);
 
   if (loading) {
     return null;
@@ -23,12 +27,14 @@ export default function Header() {
       <div className="flex items-center justify-end flex-initial cursor-pointer">
         {session ? (
           <>
-            <Link href="/upload">
-              <button className="hidden mr-2 bg-gradient-to-r from-primary to-secondary md:inline-flex items-center rounded-full md:px-3 md:py-2 text-sm leading-4 font-medium md:rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2">
-                <PlusCircleIcon className="w-6 h-6 dark:text-dark-gray md:dark:text-white" />
-                <span className="md:inline-block md:ml-2">Add photo</span>
-              </button>
-            </Link>
+            {user?.role === Role.ADMIN && (
+              <Link href="/upload">
+                <button className="hidden mr-2 bg-gradient-to-r from-primary to-secondary md:inline-flex items-center rounded-full md:px-3 md:py-2 text-sm leading-4 font-medium md:rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2">
+                  <PlusCircleIcon className="w-6 h-6 dark:text-dark-gray md:dark:text-white" />
+                  <span className="md:inline-block md:ml-2">Add photo</span>
+                </button>
+              </Link>
+            )}
             <Link href="/profile">
               <div className="flex items-center justify-center">
                 {session?.user?.image ? (
