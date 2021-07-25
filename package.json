@@ -15,6 +15,7 @@
     "aws-sdk": "^2.946.0",
     "clsx": "^1.1.1",
     "cuid": "^2.1.8",
+    "dayjs": "^1.10.6",
     "final-form": "^4.20.2",
     "next": "latest",
     "next-auth": "^3.27.3",
@@ -23,6 +24,7 @@
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.3.4",
     "react-final-form": "^6.5.3",
+    "react-hot-toast": "^2.0.0",
     "swiper": "^6.7.5",
     "swr": "^0.5.6"
   },

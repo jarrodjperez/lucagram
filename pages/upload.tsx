@@ -7,6 +7,8 @@ import useSWR from "swr";
 import { fetcher } from "../lib/fetcher";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Footer from "../components/Footer";
+import toast from "react-hot-toast";
 
 export default function UploadTest() {
   const router = useRouter();
@@ -81,6 +83,8 @@ export default function UploadTest() {
     }
 
     setLoading(false);
+    setFiles([]);
+    setDescription("");
     return await post.json();
   }
 
@@ -110,8 +114,8 @@ export default function UploadTest() {
         <div className="flex flex-col flex-grow w-full p-2">
           <label className="text-black dark:text-white mb-2">Upload</label>
           <div
-            {...getRootProps({ className: "dropzone" })}
-            className="flex flex-col items-center  border-2 border-gray-300 border-dashed rounded-md p-10"
+            {...getRootProps({ className: "dropzone h-12 w-12" })}
+            className="flex flex-col items-center border-2 border-gray-300 border-dashed rounded-md p-10"
           >
             <input {...getInputProps()} />
             <svg
@@ -163,7 +167,13 @@ export default function UploadTest() {
         <div className="flex w-full p-2">
           <button
             disabled={!files.length || loading}
-            onClick={() => savePost()}
+            onClick={() =>
+              toast.promise(savePost(), {
+                loading: "Saving post...",
+                success: "Successfull saved!",
+                error: "Could not save :(",
+              })
+            }
             type="button"
             className="flex-grow group bg-gradient-to-r from-primary to-secondary text-white relative w-full flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
@@ -194,6 +204,7 @@ export default function UploadTest() {
           </button>
         </div>
       </div>
+      <Footer />
     </section>
   );
 }

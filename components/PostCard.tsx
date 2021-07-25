@@ -3,6 +3,8 @@ import { Post } from "@prisma/client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import SwiperCore, { Pagination } from "swiper/core";
+import dayjs from "dayjs";
+import { ClockIcon } from "@heroicons/react/outline";
 SwiperCore.use([Pagination]);
 
 interface Props {
@@ -18,37 +20,53 @@ const PostCard = ({ post }: Props) => {
   };
 
   return (
-    <div className="md:mx-0 md:max-w-sm overflow-hidden shadow-lg rounded-lg bg-white dark:bg-light-gray p-4 mx-4">
-      <div className="flex flex-row items-center mb-2">
-        <Image
-          src={post["author"]["image"]}
-          objectFit="scale-down"
-          quality="100"
-          width="24px"
-          height="24px"
-        />
-        <span className="text-xs ml-2 font-mono text-primary dark:text-secondary">
+    <div className="md:mx-0 md:max-w-sm overflow-hidden shadow md:shadow-xl bg-white dark:bg-dark-gray md:border border-b dark:border-gray-700 md:border-none">
+      <div className="flex flex-row items-center p-4">
+        {post["author"]["image"] ? (
+          <Image
+            src={post["author"]["image"]}
+            objectFit="scale-down"
+            quality="100"
+            width="24px"
+            height="24px"
+          />
+        ) : (
+          <span className="h-6 w-6 rounded-full overflow-hidden bg-gray-100">
+            <svg
+              className="h-full w-full text-gray-300"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </span>
+        )}
+        <span className="text-xs ml-2 font-mono text-black dark:text-white">
           {post["author"]["name"]}
+        </span>
+        <span className="flex flex-row justify-end text-xs text-black dark:text-white flex-grow text-right">
+          <ClockIcon className="w-4 h-4 mr-1" />
+          {dayjs(new Date(post.createdAt)).format("MMMM DD, YYYY")}
         </span>
       </div>
       <Swiper pagination={pagination}>
         {post["media"].map((media) => (
           <SwiperSlide key={media.id}>
             {media.type.includes("video/") ? (
-              <video className="w-full h-60 object-cover rounded-lg" controls>
+              <video className="w-full h-60 object-cover" controls>
                 <source src={media.url} type={media.type} />
               </video>
             ) : (
               <img
                 src={media.url}
                 alt=""
-                className="w-full h-60 object-cover rounded-lg"
+                className="w-full h-60 object-cover"
               />
             )}
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="text-black dark:text-white mt-4">
+      <div className="text-black dark:text-white py-6 px-4">
         <p className="text-xs font-mono">{post.description}</p>
       </div>
     </div>

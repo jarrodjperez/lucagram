@@ -17,7 +17,7 @@ export default function Header() {
   }
 
   return (
-    <header className="flex flex-row px-2 md:px-0 py-4 sticky top-0 bg-white dark:bg-dark-gray z-10 drop-shadow-lg md:drop-shadow-none">
+    <header className="flex flex-row px-2 md:px-0 py-4 sticky top-0 bg-white dark:bg-dark-gray z-10 drop-shadow-sm md:drop-shadow-none">
       <Link href="/">
         <h1 className="text-4xl px-2 font-logo text-black font-bold dark:text-white md:flex-initial flex-grow cursor-pointer">
           Lucagram
@@ -40,10 +40,11 @@ export default function Header() {
                 {session?.user?.image ? (
                   <Image
                     src={session?.user?.image}
-                    objectFit="scale-down"
+                    objectFit="cover"
                     quality="100"
                     width="40px"
                     height="40px"
+                    className="rounded-full"
                   />
                 ) : (
                   <UserCircleIcon className="w-10 h-10 text-black dark:text-white bg-white dark:bg-dark-gray rounded-full" />

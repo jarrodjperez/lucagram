@@ -5,23 +5,33 @@ import { Form, Field } from "react-final-form";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Footer from "../components/Footer";
-
-const onSubmit = async (values: Prisma.UserUpdateInput) => {
-  const response = await fetch("/api/profile", {
-    method: "PUT",
-    body: JSON.stringify(values),
-  });
-
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-
-  return await response.json();
-};
+import toast from "react-hot-toast";
+import { useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { useS3Upload } from "next-s3-upload";
 
 export default function Profile() {
   const [session, loading] = useSession();
   const router = useRouter();
+  const [saving, setSaving] = useState(false);
+  const { uploadToS3 } = useS3Upload();
+  const [image, setImage] = useState("");
+  const { getInputProps, open } = useDropzone({
+    noClick: true,
+    noKeyboard: true,
+    maxFiles: 1,
+    accept: "image/*",
+    onDrop: async (acceptedFiles) => {
+      const s3Urls = await Promise.all(
+        acceptedFiles.map(async (file) => {
+          const { url } = await uploadToS3(file);
+          return url;
+        })
+      );
+
+      setImage(s3Urls[0]);
+    },
+  });
 
   if (!loading && !session) {
     router.push("/signin");
@@ -35,6 +45,28 @@ export default function Profile() {
     );
   }
 
+  const onSubmit = async (values: Prisma.UserUpdateInput) => {
+    setSaving(true);
+    const response = await toast.promise(
+      fetch("/api/profile", {
+        method: "PUT",
+        body: JSON.stringify({ ...values, image }),
+      }),
+      {
+        loading: "Saving profile...",
+        success: "Successfully saved!",
+        error: "Could not save :(",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    setSaving(false);
+    return await response.json();
+  };
+
   return (
     <div className="container mx-auto">
       <Header />
@@ -43,7 +75,6 @@ export default function Profile() {
           onSubmit={onSubmit}
           initialValues={{
             name: session?.user?.name,
-            image: session?.user?.image,
           }}
           render={({ handleSubmit, submitting, pristine }) => (
             <form
@@ -95,13 +126,15 @@ export default function Profile() {
                       Photo
                     </label>
                     <div className="mt-1 flex items-center">
-                      {false ? (
+                      <input {...getInputProps()} />
+                      {image || session?.user?.image ? (
                         <Image
-                          src={session?.user?.image}
-                          objectFit="scale-down"
+                          src={image || session?.user?.image}
+                          objectFit="cover"
                           quality="100"
                           width="48px"
                           height="48px"
+                          className="rounded-full"
                         />
                       ) : (
                         <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
@@ -116,6 +149,7 @@ export default function Profile() {
                       )}
                       <button
                         type="button"
+                        onClick={open}
                         className="bg-gradient-to-r from-primary to-secondary text-white ml-5 py-2 px-3 rounded-md shadow-sm text-sm leading-4 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
                       >
                         Change
@@ -128,10 +162,33 @@ export default function Profile() {
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    disabled={pristine || submitting}
-                    className="bg-gradient-to-r from-primary to-secondary text-white ml-5 py-2 px-3 rounded-md shadow-sm text-sm leading-4 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    disabled={submitting}
+                    className=" w-full flex justify-center bg-gradient-to-r from-primary to-secondary text-white py-2 px-3 rounded-md shadow-sm text-sm leading-4 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
                   >
-                    Save
+                    {saving ? (
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          stroke-width="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                    ) : (
+                      <>Save</>
+                    )}
                   </button>
                 </div>
               </div>
