@@ -4,7 +4,7 @@ module.exports = {
   darkMode: "media", // or 'media' or 'class'
   theme: {
     fontFamily: {
-      sans: ["Montserrat"],
+      sans: ["Inter, ui-sans-serif, system-ui, sans-serif"],
       logo: ["Cookie"],
       mono: ["ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas"],
     },

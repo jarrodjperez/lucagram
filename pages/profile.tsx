@@ -70,7 +70,7 @@ export default function Profile() {
   return (
     <div className="container mx-auto">
       <Header />
-      <div className="w-full max-w-4xl mx-auto mt-4 p-4 sm:p-6 lg:p-8 dark:bg-light-gray">
+      <div className="w-full max-w-4xl mx-auto mt-4 p-6 lg:p-8 dark:bg-light-gray">
         <Form
           onSubmit={onSubmit}
           initialValues={{
@@ -82,15 +82,15 @@ export default function Profile() {
               onSubmit={handleSubmit}
             >
               <div className="space-y-8 divide-y divide-gray-200 dark:divide-white">
-                <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                   <div className="sm:col-span-6">
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-black dark:text-white"
+                      className="block text-sm font-bold text-black dark:text-white"
                     >
                       Email
                     </label>
-                    <span className="text-black dark:text-white">
+                    <span className="text-black text-sm dark:text-white">
                       {session?.user?.email}
                     </span>
                     <button
@@ -105,7 +105,7 @@ export default function Profile() {
                   <div className="sm:col-span-3">
                     <label
                       htmlFor="name"
-                      className="block text-sm font-medium text-black dark:text-white"
+                      className="block text-sm font-bold text-black dark:text-white mb-2"
                     >
                       Name
                     </label>
@@ -121,7 +121,7 @@ export default function Profile() {
                   <div className="sm:col-span-6">
                     <label
                       htmlFor="photo"
-                      className="block text-sm font-medium text-black dark:text-white"
+                      className="block text-sm font-bold text-black dark:text-white"
                     >
                       Photo
                     </label>

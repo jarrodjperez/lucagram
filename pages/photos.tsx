@@ -3,11 +3,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import useSWR from "swr";
 import { fetcher } from "../lib/fetcher";
+import FullPageLoader from "../components/FullPageLoader";
 
 export default function Photos() {
-  const { data: photos, error } = useSWR("/api/photos", fetcher);
+  const { data: photos } = useSWR("/api/photos", fetcher);
 
-  if (!photos) return null;
+  if (!photos) return <FullPageLoader />;
 
   return (
     <div className="container mx-auto">

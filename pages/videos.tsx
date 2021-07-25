@@ -3,11 +3,13 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import useSWR from "swr";
 import { fetcher } from "../lib/fetcher";
+import FullPageLoader from "../components/FullPageLoader";
 
 export default function Home() {
-  const { data: videos, error } = useSWR("/api/videos", fetcher);
+  const { data: videos } = useSWR("/api/videos", fetcher);
 
-  if (!videos) return null;
+  if (!videos) return <FullPageLoader />;
+
   return (
     <div className="container mx-auto">
       <Header />

@@ -10,11 +10,7 @@ export default function Navigation() {
   return (
     <nav className="hidden md:flex md:flex-grow md:items-center md:justify-center">
       <Link href="/feed">
-        <a
-          className={clsx(
-            "font-medium px-6 cursor-pointer text-black dark:text-white"
-          )}
-        >
+        <a className={clsx("px-6 cursor-pointer text-black dark:text-white")}>
           Feed
           {pathname === "/feed" && (
             <div className="h-0.5 bg-gradient-to-r from-primary to-secondary w-full"></div>
@@ -22,11 +18,7 @@ export default function Navigation() {
         </a>
       </Link>
       <Link href="/photos">
-        <a
-          className={clsx(
-            "font-medium px-6 cursor-pointer text-black dark:text-white"
-          )}
-        >
+        <a className={clsx("px-6 cursor-pointer text-black dark:text-white")}>
           Photos
           {pathname === "/photos" && (
             <div className="h-0.5 bg-gradient-to-r from-primary to-secondary w-full"></div>
@@ -34,11 +26,7 @@ export default function Navigation() {
         </a>
       </Link>
       <Link href="/videos">
-        <a
-          className={clsx(
-            "font-medium px-6 cursor-pointer text-black dark:text-white"
-          )}
-        >
+        <a className={clsx("px-6 cursor-pointer text-black dark:text-white")}>
           Videos
           {pathname === "/videos" && (
             <div className="h-0.5 bg-gradient-to-r from-primary to-secondary w-full"></div>
@@ -46,11 +34,7 @@ export default function Navigation() {
         </a>
       </Link>
       <Link href="/profile">
-        <a
-          className={clsx(
-            "font-medium px-6 cursor-pointer text-black dark:text-white"
-          )}
-        >
+        <a className={clsx("px-6 cursor-pointer text-black dark:text-white")}>
           Profile
           {pathname === "/profile" && (
             <div className="h-0.5 bg-gradient-to-r from-primary to-secondary w-full"></div>
