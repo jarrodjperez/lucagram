@@ -110,7 +110,7 @@ export default function UploadTest() {
   return (
     <section className="container mx-auto">
       <Header />
-      <div className="flex flex-col max-w-6xl mx-auto">
+      <div className="flex flex-col max-w-6xl mx-auto pb-20 md:pb-0">
         <div className="flex flex-col flex-grow w-full p-2">
           <label className="text-black dark:text-white mb-2">Upload</label>
           <div
