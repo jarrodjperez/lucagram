@@ -1,11 +1,12 @@
 import { csrfToken, getSession, useSession } from "next-auth/client";
 import { LockClosedIcon } from "@heroicons/react/solid";
+import FullPageLoader from "../components/FullPageLoader";
 
 const signin = ({ csrfToken }) => {
   const [loading] = useSession();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <FullPageLoader />;
   }
 
   return (

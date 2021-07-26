@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useS3Upload } from "next-s3-upload";
+import FullPageLoader from "../components/FullPageLoader";
 
 export default function Profile() {
   const [session, loading] = useSession();
@@ -35,14 +36,11 @@ export default function Profile() {
 
   if (!loading && !session) {
     router.push("/signin");
+    return <FullPageLoader />;
   }
 
   if (loading) {
-    return (
-      <div className="flex h-screen">
-        <div className="m-auto">Loading...</div>
-      </div>
-    );
+    return <FullPageLoader />;
   }
 
   const onSubmit = async (values: Prisma.UserUpdateInput) => {

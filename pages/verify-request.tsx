@@ -1,10 +1,11 @@
 import { getSession, useSession } from "next-auth/client";
+import FullPageLoader from "../components/FullPageLoader";
 
 const verify = () => {
   const [loading] = useSession();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <FullPageLoader />;
   }
 
   return (
