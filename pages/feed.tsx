@@ -11,9 +11,9 @@ export default function Feed() {
   if (!posts) return <FullPageLoader />;
 
   return (
-    <div className="md:container mx-auto relative">
+    <div className="sm:container mx-auto relative">
       <Header />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:gap-10 overflow-hidden items-center pb-20 md:pb-4 pt-0 md:pt-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-10 overflow-hidden items-center pb-12 sm:pb-4 pt-0 sm:pt-2">
         {posts && posts.map((post) => <PostCard key={post.id} post={post} />)}
       </div>
       <Footer />

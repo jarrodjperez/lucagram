@@ -10,44 +10,41 @@ import { User, Role } from "@prisma/client";
 
 export default function Header() {
   const [session, loading] = useSession();
-  const { data: user, error } = useSWR<User>("/api/me", fetcher);
+  const { data: user } = useSWR<User>("/api/me", fetcher);
 
   if (loading) {
     return null;
   }
 
   return (
-    <header className="flex flex-row px-2 md:px-0 py-4 sticky top-0 bg-white dark:bg-dark-gray z-10 drop-shadow-sm md:drop-shadow-none">
-      <Link href="/">
-        <h1 className="text-4xl px-2 font-logo text-black font-bold dark:text-white md:flex-initial flex-grow cursor-pointer">
-          Lucagram
-        </h1>
-      </Link>
+    <header className="flex flex-row px-2 sm:px-0 py-2 sm:py-4 sticky top-0 bg-white dark:bg-dark-gray z-10 border-b dark:border-gray-700 sm:border-0">
       <Navigation />
       <div className="flex items-center justify-end flex-initial cursor-pointer">
         {session ? (
           <>
-            {user?.role === Role.ADMIN && (
+            {user?.role === "ADMIN" && (
               <Link href="/upload">
-                <button className="hidden mr-2 bg-gradient-to-r from-primary to-secondary md:inline-flex items-center rounded-full md:px-3 md:py-2 text-sm leading-4 font-medium md:rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2">
-                  <PlusCircleIcon className="w-6 h-6 dark:text-dark-gray md:dark:text-white" />
-                  <span className="md:inline-block md:ml-2">Add photo</span>
+                <button className="mr-2 bg-gray-600 dark:bg-white sm:bg-gradient-to-r from-primary to-secondary sm:inline-flex items-center rounded-full sm:px-2 sm:py-1 text-sm leading-4 font-medium sm:rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2">
+                  <PlusCircleIcon className="w-6 h-6 dark:text-dark-gray sm:dark:text-white" />
+                  <span className="hidden sm:inline-block sm:ml-2">
+                    Add photo
+                  </span>
                 </button>
               </Link>
             )}
             <Link href="/profile">
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center bg-gradient-to-r from-primary to-secondary rounded-full h-7 w-7">
                 {session?.user?.image ? (
                   <Image
                     src={session?.user?.image}
                     objectFit="cover"
                     quality="100"
-                    width="40px"
-                    height="40px"
+                    width="24px"
+                    height="24px"
                     className="rounded-full"
                   />
                 ) : (
-                  <UserCircleIcon className="w-10 h-10 text-black dark:text-white bg-white dark:bg-dark-gray rounded-full" />
+                  <UserCircleIcon className="w-10 h-10 text-gray-600 dark:text-white bg-white dark:bg-dark-gray rounded-full" />
                 )}
               </div>
             </Link>

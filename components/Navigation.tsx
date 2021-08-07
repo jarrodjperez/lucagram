@@ -8,96 +8,52 @@ export default function Navigation() {
   const [session] = useSession();
 
   return (
-    <nav className="hidden md:flex md:flex-grow md:items-center md:justify-center">
-      <Link href="/feed">
-        <a className={clsx("px-6 cursor-pointer text-black dark:text-white")}>
-          Feed
-          {pathname === "/feed" && (
-            <div className="h-0.5 bg-gradient-to-r from-primary to-secondary w-full"></div>
-          )}
-        </a>
+    <div className="flex flex-grow">
+      <Link href="/">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-3xl px-2 font-logo text-black font-bold dark:text-white sm:flex-initial flex-grow cursor-pointer">
+            Lucagram
+          </h1>
+        </div>
       </Link>
-      <Link href="/photos">
-        <a className={clsx("px-6 cursor-pointer text-black dark:text-white")}>
-          Photos
-          {pathname === "/photos" && (
-            <div className="h-0.5 bg-gradient-to-r from-primary to-secondary w-full"></div>
-          )}
-        </a>
-      </Link>
-      <Link href="/videos">
-        <a className={clsx("px-6 cursor-pointer text-black dark:text-white")}>
-          Videos
-          {pathname === "/videos" && (
-            <div className="h-0.5 bg-gradient-to-r from-primary to-secondary w-full"></div>
-          )}
-        </a>
-      </Link>
-      <Link href="/profile">
-        <a className={clsx("px-6 cursor-pointer text-black dark:text-white")}>
-          Profile
-          {pathname === "/profile" && (
-            <div className="h-0.5 bg-gradient-to-r from-primary to-secondary w-full"></div>
-          )}
-        </a>
-      </Link>
-    </nav>
-  );
-
-  return (
-    <nav>
-      <h2 className="hidden md:block border-b border-gray-200 leading-hl w-full text-center my-10">
-        <span className="bg-white px-4">
-          <Link href="/">
-            <span
-              className={clsx(
-                "hover:text-gray-600 cursor-pointer px-6 text-gray-400",
-                pathname === "/" && "text-red-400"
-              )}
-            >
-              Feed
-            </span>
-          </Link>
-          <Link href="/photos">
-            <span
-              className={clsx(
-                "hover:text-gray-600 cursor-pointer px-6 text-gray-400",
-                pathname === "/photos" && "text-red-400"
-              )}
-            >
-              Photos
-            </span>
-          </Link>
-          <Link href="/videos">
-            <span
-              className={clsx(
-                "hover:text-gray-600 cursor-pointer px-6 text-gray-400",
-                pathname === "/videos" && "text-red-400"
-              )}
-            >
-              Videos
-            </span>
-          </Link>
-          {session ? (
-            <Link href="/profile">
-              <span
-                className={clsx(
-                  "hover:text-gray-600 cursor-pointer px-6 text-gray-400",
-                  pathname === "/profile" && "text-red-400"
-                )}
-              >
-                Profile
-              </span>
-            </Link>
-          ) : (
-            <Link href="/signin">
-              <span className="hover:text-gray-600 cursor-pointer px-6 text-gray-400">
-                Sign in
-              </span>
-            </Link>
-          )}
-        </span>
-      </h2>
-    </nav>
+      <div className="hidden justify-center sm:ml-6 sm:flex sm:space-x-8">
+        <Link href="/feed">
+          <a
+            className={clsx(
+              "cursor-pointer text-gray-600 dark:text-white inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 border-transparent",
+              pathname === "/feed"
+                ? "border-gray-500 dark:border-white"
+                : "hover:border-gray-300 dark:hover:border-gray-700"
+            )}
+          >
+            Feed
+          </a>
+        </Link>
+        <Link href="/photos">
+          <a
+            className={clsx(
+              "cursor-pointer text-gray-600 dark:text-white inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 border-transparent",
+              pathname === "/photos"
+                ? "border-gray-500 dark:border-white"
+                : "hover:border-gray-300 dark:hover:border-gray-700"
+            )}
+          >
+            Photos
+          </a>
+        </Link>
+        <Link href="/videos">
+          <a
+            className={clsx(
+              "cursor-pointer text-gray-600 dark:text-white inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 border-transparent",
+              pathname === "/videos"
+                ? "border-gray-500 dark:border-white"
+                : "hover:border-gray-300 dark:hover:border-gray-700"
+            )}
+          >
+            Videos
+          </a>
+        </Link>
+      </div>
+    </div>
   );
 }

@@ -20,16 +20,18 @@ const PostCard = ({ post }: Props) => {
   };
 
   return (
-    <div className="md:mx-0 md:max-w-sm overflow-hidden shadow md:shadow-xl bg-white dark:bg-dark-gray md:border border-b dark:border-gray-700 md:border-none">
+    <div className="sm:mx-0 sm:max-w-sm overflow-hidden shadow sm:shadow-md bg-white dark:bg-dark-gray border-b dark:border-gray-700 sm:border-none">
       <div className="flex flex-row items-center p-4">
         {post["author"]["image"] ? (
-          <Image
-            src={post["author"]["image"]}
-            objectFit="scale-down"
-            quality="100"
-            width="24px"
-            height="24px"
-          />
+          <div className="flex items-center justify-center bg-gradient-to-r from-primary to-secondary rounded-full h-6 w-6">
+            <Image
+              src={post["author"]["image"]}
+              objectFit="scale-down"
+              quality="100"
+              width="20px"
+              height="20px"
+            />
+          </div>
         ) : (
           <span className="h-6 w-6 rounded-full overflow-hidden bg-gray-100">
             <svg
@@ -41,10 +43,10 @@ const PostCard = ({ post }: Props) => {
             </svg>
           </span>
         )}
-        <span className="text-xs ml-2 font-mono text-black dark:text-white">
+        <span className="text-xs ml-2 font-mono text-gray-600 dark:text-white">
           {post["author"]["name"]}
         </span>
-        <span className="flex flex-row justify-end text-xs text-black dark:text-white flex-grow text-right">
+        <span className="flex flex-row justify-end text-xs text-gray-600 dark:text-white flex-grow text-right">
           <ClockIcon className="w-4 h-4 mr-1" />
           {dayjs(new Date(post.createdAt)).format("MMMM DD, YYYY")}
         </span>
@@ -66,7 +68,7 @@ const PostCard = ({ post }: Props) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="text-black dark:text-white py-6 px-4">
+      <div className="text-gray-600 dark:text-white py-6 px-4">
         <p className="text-xs font-mono">{post.description}</p>
       </div>
     </div>

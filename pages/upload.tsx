@@ -91,7 +91,7 @@ export default function UploadTest() {
   const thumbs = files.map((file) => {
     return (
       <div
-        className="flex w-40 md:w-72 h-full m-2 p-1 justify-center items-center shadow-xl"
+        className="flex w-40 sm:w-72 h-full m-2 p-1 justify-center items-center shadow-xl"
         key={file.url}
       >
         <div className="flex overflow-hidden">
@@ -110,12 +110,12 @@ export default function UploadTest() {
   return (
     <section className="container mx-auto">
       <Header />
-      <div className="flex flex-col max-w-6xl mx-auto pb-20 md:pb-0">
+      <div className="flex flex-col max-w-6xl mx-auto pb-20 sm:pb-0">
         <div className="flex flex-col flex-grow w-full p-2">
-          <label className="text-black dark:text-white mb-2">Upload</label>
+          <label className="text-gray-600 dark:text-white mb-2">Upload</label>
           <div
             {...getRootProps({ className: "dropzone h-12 w-12" })}
-            className="flex flex-col items-center border-2 border-gray-300 border-dashed rounded-md p-10"
+            className="flex flex-col items-center border-2 border-gray-300 border-dashed rounded-sm p-10"
           >
             <input {...getInputProps()} />
             <svg
@@ -139,7 +139,7 @@ export default function UploadTest() {
         </div>
         <div className="grid grid-cols-2 px-2 mt-6">
           <label
-            className="text-black dark:text-white mb-2"
+            className="text-gray-600 dark:text-white mb-2"
             htmlFor="description"
           >
             Description
@@ -153,11 +153,11 @@ export default function UploadTest() {
             className="col-span-2 border border-gray-300"
           />
         </div>
-        <label className="flex w-full p-2 mt-6 text-black dark:text-white mb-2">
+        <label className="flex w-full p-2 mt-6 text-gray-600 dark:text-white mb-2">
           Media
         </label>
         {!files.length && (
-          <div className="flex flex-col justify-center items-center h-24 text-black dark:text-white text-center">
+          <div className="flex flex-col justify-center items-center h-24 text-gray-600 dark:text-white text-center">
             No media uploaded
           </div>
         )}
@@ -175,7 +175,7 @@ export default function UploadTest() {
               })
             }
             type="button"
-            className="flex-grow group bg-gradient-to-r from-primary to-secondary text-white relative w-full flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
+            className="flex-grow group bg-gradient-to-r from-primary to-secondary text-white relative w-full flex justify-center py-2 px-4 rounded-sm shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
             {loading ? (
               <svg

@@ -84,11 +84,11 @@ export default function Profile() {
                   <div className="sm:col-span-6">
                     <label
                       htmlFor="email"
-                      className="block text-sm font-bold text-black dark:text-white"
+                      className="block text-sm font-bold text-gray-600 dark:text-white"
                     >
                       Email
                     </label>
-                    <span className="text-black text-sm dark:text-white">
+                    <span className="text-gray-600 text-sm dark:text-white">
                       {session?.user?.email}
                     </span>
                     <button
@@ -103,7 +103,7 @@ export default function Profile() {
                   <div className="sm:col-span-3">
                     <label
                       htmlFor="name"
-                      className="block text-sm font-bold text-black dark:text-white mb-2"
+                      className="block text-sm font-bold text-gray-600 dark:text-white mb-2"
                     >
                       Name
                     </label>
@@ -111,7 +111,7 @@ export default function Profile() {
                       name="name"
                       component="input"
                       type="text"
-                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                      className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Name"
                     />
                   </div>
@@ -119,7 +119,7 @@ export default function Profile() {
                   <div className="sm:col-span-6">
                     <label
                       htmlFor="photo"
-                      className="block text-sm font-bold text-black dark:text-white"
+                      className="block text-sm font-bold text-gray-600 dark:text-white"
                     >
                       Photo
                     </label>

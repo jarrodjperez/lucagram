@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div className="container mx-auto">
       <Header />
-      <div className="grid grid-cols-3 gap-0 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:gap-10 items-center md:pt-4 pb-16 md:pb-4">
+      <div className="grid grid-cols-3 gap-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-10 items-center sm:pt-4 pb-16 sm:pb-4">
         {videos.map((video) => (
           <VideoCard key={video.id} video={video} />
         ))}

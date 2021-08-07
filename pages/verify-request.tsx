@@ -11,13 +11,13 @@ const verify = () => {
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col justify-center items-center max-w-xl w-full space-y-8">
-        <h1 className="text-4xl px-2 text-center text-black dark:text-white">
+        <h1 className="text-4xl px-2 text-center text-gray-600 dark:text-white">
           Check your email
         </h1>
-        <h2 className="mt-6 text-center text-2xl text-black dark:text-white">
+        <h2 className="mt-6 text-center text-2xl text-gray-600 dark:text-white">
           A link has been sent to your email address
         </h2>
-        <p className="text-black dark:text-white">
+        <p className="text-gray-600 dark:text-white">
           {process.env.NEXT_PUBLIC_NEXTAUTH_URL}
         </p>
       </div>

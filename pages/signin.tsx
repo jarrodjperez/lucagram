@@ -13,10 +13,10 @@ const signin = ({ csrfToken }) => {
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h1 className="text-6xl px-2 font-logo text-center text-black dark:text-white">
+          <h1 className="text-6xl px-2 font-logo text-center text-gray-600 dark:text-white">
             Lucagram
           </h1>
-          <h2 className="mt-6 text-center text-2xl text-black dark:text-white">
+          <h2 className="mt-6 text-center text-2xl text-gray-600 dark:text-white">
             Sign in to your account
           </h2>
         </div>
@@ -37,7 +37,7 @@ const signin = ({ csrfToken }) => {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:z-10 sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
             </div>

@@ -26,6 +26,10 @@ export default NextAuth({
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
   secret: process.env.SECRET,
+  session: {
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 0, // Sessions updated only if session is greater than this value (0 = always, 24*60*60 = every 24 hours)
+  },
   callbacks: {
     async session(session, token) {
       // expose user id
