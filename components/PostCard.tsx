@@ -30,6 +30,7 @@ const PostCard = ({ post }: Props) => {
               quality="100"
               width="20px"
               height="20px"
+              className="rounded-full"
             />
           </div>
         ) : (
