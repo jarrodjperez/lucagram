@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import Adapters from "next-auth/adapters";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "../../../lib/prisma";
 
 export default NextAuth({
@@ -24,7 +24,7 @@ export default NextAuth({
       from: process.env.SMTP_FROM, // The "from" address that you want to use
     }),
   ],
-  adapter: Adapters.Prisma.Adapter({ prisma }),
+  adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
   session: {
     maxAge: 30 * 24 * 60 * 60, // 30 days
