@@ -1,16 +1,12 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-  referentialIntegrity = "prisma"
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
-generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model Account {
@@ -52,7 +48,7 @@ model User {
   sessions      Session[]
   posts         Post[]
   comments      Comment[]
-  role          Role     @default(USER)
+  role          Role      @default(USER)
 }
 
 model VerificationRequest {
@@ -67,37 +63,43 @@ model VerificationRequest {
 }
 
 model Post {
-  id          String      @id @default(cuid())
-  createdAt   DateTime    @default(now())
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
   description String?
-  author      User        @relation(fields: [authorId], references: [id])
+  author      User      @relation(fields: [authorId], references: [id])
   authorId    String
-  media       Media[]     @relation(references: [id])
+  media       Media[]
   comments    Comment[]
 }
 
 model Media {
-  id   String   @id       @default(cuid())
-  createdAt     DateTime   @default(now())
-  type String
-  url  String
-  posts Post[]  @relation(references: [id])
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  type      String
+  url       String
+  posts     Post[]
 }
 
 model Comment {
-  id          String      @id @default(cuid())
-  createdAt   DateTime    @default(now())
-  content     String
-  post        Post        @relation(fields: [postId], references: [id])
-  postId      String
-  author      User        @relation(fields: [authorId], references: [id])
-  authorId    String
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  content   String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+}
+
+model MediaToPost {
+  A String
+  B String
+
+  @@unique([A, B], map: "_MediaToPost_AB_unique")
+  @@index([B], map: "_MediaToPost_B_index")
+  @@map("_MediaToPost")
 }
 
 enum Role {
   USER
   ADMIN
 }
-
-
-
